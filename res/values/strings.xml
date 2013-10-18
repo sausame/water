@@ -11,4 +11,6 @@
 
     <string name="record_is_deleted">1 Deleted</string>
     <string name="undo">Undo</string>
+    <string name="pulltorefresh">Pull to refresh</string>
+    <string name="lastupdate">Last update</string>
 </resources>

@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -19,6 +20,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,9 +33,9 @@ public class MainActivity extends Activity {
 	private static final int MODIFY = 1;
 	private static final int DELETE = 2;
 
-	private ArrayList<Water> mData = null;
+	private ArrayList<Water> mData = new ArrayList<Water>();
 	private WaterAdapter mAdapter;
-	private SwipeListView mDateStatusList;
+	private MsgListView mDateStatusList;
 
 	private WaterManager mManager = new WaterManager();
 
@@ -44,26 +47,32 @@ public class MainActivity extends Activity {
 		initData();
 
 		mAdapter = new WaterAdapter(this, mData);
-		mDateStatusList = (SwipeListView) findViewById(R.id.list);
+		mDateStatusList = (MsgListView) findViewById(R.id.list);
 		mDateStatusList.setAdapter(mAdapter);
-		mDateStatusList.setWindow(getWindow());
+		// mDateStatusList.setWindow(getWindow());
+		// mDateStatusList
+		// .setListViewCallBack(new SwipeListView.ListViewCallBack() {
+		// @Override
+		// public void showCannotSwipe() {
+		// }
+		//
+		// @Override
+		// public void onChildDismissed(View v, int position) {
+		// deleteRaw(position);
+		// }
+		//
+		// @Override
+		// public boolean canDismissed(View v, int position) {
+		// return true;
+		// }
+		// });
+
 		mDateStatusList
-				.setListViewCallBack(new SwipeListView.ListViewCallBack() {
-					@Override
-					public void showCannotSwipe() {
-					}
-
-					@Override
-					public void onChildDismissed(View v, int position) {
-						deleteRaw(position);
-					}
-
-					@Override
-					public boolean canDismissed(View v, int position) {
-						return true;
+				.setonRefreshListener(new MsgListView.OnRefreshListener() {
+					public void onRefresh() {
+						new MsgLoad().execute();
 					}
 				});
-
 		setData();
 	}
 
@@ -115,15 +124,9 @@ public class MainActivity extends Activity {
 	private void onActionSettings() {
 	}
 
-	private void deleteRaw(int position) {
-
-	}
-
 	public void initData() {
 		mManager.setPathname(getString(R.string.filename));
 		mManager.load();
-
-		mData = new ArrayList<Water>();
 	}
 
 	public void setData() {
@@ -144,10 +147,15 @@ public class MainActivity extends Activity {
 	public class WaterAdapter extends BaseAdapter {
 		private Context mContext;
 		private ArrayList<Water> mData = null;
+		private boolean mIsUpdating = false;
 
 		public WaterAdapter(Context context, ArrayList<Water> data) {
 			mContext = context;
 			mData = data;
+		}
+
+		public void setIsUpdating(boolean isUpdating) {
+			mIsUpdating = isUpdating;
 		}
 
 		// ====================================================================
@@ -184,7 +192,7 @@ public class MainActivity extends Activity {
 				viewGroup = (ItemViewGroup) view.getTag();
 			}
 
-			viewGroup.setValues(mData.get(position));
+			viewGroup.setValues(mData.get(position), mIsUpdating);
 
 			return view;
 		}
@@ -200,6 +208,8 @@ public class MainActivity extends Activity {
 			public TextView mWeather;
 			public TextView mDate;
 			public TextView mParamGroup[] = new TextView[Water.PARAM_NUM];
+			
+			public ProgressBar mProgressBar;
 
 			private ItemViewGroup(View parent) {
 				setViews(parent);
@@ -219,9 +229,11 @@ public class MainActivity extends Activity {
 					mParamGroup[i] = (TextView) parent
 							.findViewById(mParamResIDGroup[i]);
 				}
+				
+				mProgressBar = (ProgressBar) parent.findViewById(R.id.progress);
 			}
 
-			public void setValues(Water water) {
+			public void setValues(Water water, boolean isUpdating) {
 				mParent.setBackgroundResource(mBgResIDGroup[water.getLevel()]);
 
 				mIndexParam.setText("" + water.getIndexParam());
@@ -233,6 +245,12 @@ public class MainActivity extends Activity {
 
 				for (int i = 0; i < Water.PARAM_NUM; i++) {
 					mParamGroup[i].setText("" + water.getParam(i));
+				}
+
+				if (isUpdating) {
+					mProgressBar.setVisibility(View.VISIBLE);
+				} else {
+					mProgressBar.setVisibility(View.GONE);
 				}
 			}
 
@@ -247,4 +265,35 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	public class MsgLoad extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			try {
+				Thread.sleep(5000);
+				WaterManager.test();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			return null;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			mAdapter.setIsUpdating(true);
+			mAdapter.notifyDataSetChanged();
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			mAdapter.setIsUpdating(false);
+
+			initData();
+			setData();
+
+			mDateStatusList.onRefreshComplete();
+		}
+
+	}
 }
