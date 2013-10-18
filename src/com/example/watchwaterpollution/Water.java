@@ -18,7 +18,7 @@ import org.json.JSONObject;
 public class Water implements Serializable {
 
 	private static final String TAG = "Water";
-	private static final int PARAM_NUM = 4;
+	public static final int PARAM_NUM = 4;
 	private static final String DATETIME_FORMAT = "yyyy-MM-dd hh:mm";
 
 	private int mIndexParam;
@@ -26,6 +26,8 @@ public class Water implements Serializable {
 	private Date mUpdateTime;
 	private String mCity;
 	private String mLocation;
+	private String mDescription;
+	private String mWeather;
 
 	public int getIndexParam() {
 		return mIndexParam;
@@ -81,6 +83,26 @@ public class Water implements Serializable {
 		mLocation = city;
 	}
 
+	public String getDescription() {
+		return mDescription;
+	}
+
+	public void setDescription(String city) {
+		mDescription = city;
+	}
+
+	public String getWeather() {
+		return mWeather;
+	}
+
+	public void setWeather(String city) {
+		mWeather = city;
+	}
+
+	public final int getLevel() {
+		return mIndexParam % 10;
+	}
+
 	public static Water parseWater(JSONObject object) {
 		try {
 			Water water = new Water();
@@ -94,6 +116,8 @@ public class Water implements Serializable {
 			water.setFormatUpdateTime(object.getString("UpdateTime"));
 			water.setCity(object.getString("City"));
 			water.setLocation(object.getString("Location"));
+			water.setDescription(object.getString("Description"));
+			water.setWeather(object.getString("Weather"));
 
 			return water;
 		} catch (Exception e) {
@@ -114,6 +138,8 @@ public class Water implements Serializable {
 			object.put("UpdateTime", getFormatUpdateTime());
 			object.put("City", getCity());
 			object.put("Location", getLocation());
+			object.put("Description", getDescription());
+			object.put("Weather", getWeather());
 
 			return object;
 		} catch (JSONException e) {
@@ -123,10 +149,12 @@ public class Water implements Serializable {
 	}
 
 	public String toString() {
-		String str = "DateTime: " + mUpdateTime + "\n";
+		String str = "IndexParam: " + mIndexParam + "\n";
+		str += "DateTime: " + mUpdateTime + "\n";
 		str += "City: " + mCity + "\n";
-		str += "mLocation: " + mLocation + "\n";
-		str += "IndexParam: " + mIndexParam + "\n";
+		str += "Location: " + mLocation + "\n";
+		str += "Description: " + mDescription + "\n";
+		str += "Weather: " + mWeather + "\n";
 
 		for (int i = 0; i < mParamGroup.length; i++) {
 			str += "NO." + i + ": " + mParamGroup[i] + "\n";
@@ -156,6 +184,8 @@ public class Water implements Serializable {
 
 		water.mCity = "City-" + Math.abs(random.nextInt()) % 10;
 		water.mLocation = "Location-" + Math.abs(random.nextInt()) % 10;
+		water.mDescription = "Description-" + Math.abs(random.nextInt()) % 10;
+		water.mWeather = "Weather-" + Math.abs(random.nextInt()) % 10;
 
 		return water;
 	}

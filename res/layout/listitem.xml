@@ -1,15 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants" >
+    android:background="@drawable/pic_2" >
 
     <TextView
-        android:id="@+id/date"
-        android:layout_width="@dimen/listbar_layout_1_item_width"
-        android:layout_height="@dimen/listbar_layout_height"
+        android:id="@+id/index_param"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:textColor="@color/list_main"
-        android:textSize="@dimen/list_main_textsize" />
-    
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="8.0dip"
+        android:gravity="top"
+        android:shadowColor="#FF000000"
+        android:shadowDy="1.0"
+        android:shadowRadius="1.0"
+        android:text="Index"
+        android:textColor="#FFFFFFFF"
+        android:textSize="60.0sp" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="8.0dip"
+        android:layout_marginTop="13.0dip"
+        android:layout_toRightOf="@+id/index_param"
+        android:shadowColor="#FF000000"
+        android:shadowDy="1.0"
+        android:shadowRadius="1.0"
+        android:text="City"
+        android:textColor="#FFFFFFFF"
+        android:textSize="20.0sp" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/city"
+        android:layout_marginLeft="8.0dip"
+        android:layout_marginTop="11.0dip"
+        android:layout_toRightOf="@+id/city"
+        android:shadowColor="#FF000000"
+        android:shadowDy="1.0"
+        android:shadowRadius="1.0"
+        android:text="Brief Description"
+        android:textColor="#FFFFFFFF"
+        android:textSize="10.0sp" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/city"
+        android:layout_below="@+id/city"
+        android:layout_marginTop="3.0dip"
+        android:shadowColor="#FF000000"
+        android:shadowDy="1.0"
+        android:shadowRadius="1.0"
+        android:text="GOOD FOR HEALTH"
+        android:textColor="#FFFFFFFF"
+        android:textSize="14.0sp" >
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="14.0dip"
+            android:gravity="end"
+            android:shadowColor="#FF000000"
+            android:shadowDy="1.0"
+            android:shadowRadius="1.0"
+            android:text="Weather"
+            android:textColor="#FFFFFFFF"
+            android:textSize="11.0sp" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="10.0dip"
+            android:layout_marginRight="14.0dip"
+            android:shadowColor="#FF000000"
+            android:shadowDy="1.0"
+            android:shadowRadius="1.0"
+            android:text="Date"
+            android:textColor="#FFFFFFFF"
+            android:textSize="11.0sp" >
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/param_name_0"
+                android:layout_width="48.0dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:shadowColor="#FF000000"
+                android:shadowDy="1.0"
+                android:shadowRadius="1.0"
+                android:text="Name 0"
+                android:textColor="#FFFFFFFF"
+                android:textSize="10.0sp" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/param_name_1"
+                android:layout_width="48.0dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:shadowColor="#FF000000"
+                android:shadowDy="1.0"
+                android:shadowRadius="1.0"
+                android:text="Name 1"
+                android:textColor="#FFFFFFFF"
+                android:textSize="10.0sp" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/param_name_2"
+                android:layout_width="48.0dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:shadowColor="#FF000000"
+                android:shadowDy="1.0"
+                android:shadowRadius="1.0"
+                android:text="Name 2"
+                android:textColor="#FFFFFFFF"
+                android:textSize="10.0sp" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/param_name_3"
+                android:layout_width="48.0dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:shadowColor="#FF000000"
+                android:shadowDy="1.0"
+                android:shadowRadius="1.0"
+                android:text="Name 3"
+                android:textColor="#FFFFFFFF"
+                android:textSize="10.0sp" >
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/param_0"
+                android:layout_width="48.0dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:shadowColor="#FF000000"
+                android:shadowDy="1.0"
+                android:shadowRadius="1.0"
+                android:text="0"
+                android:textColor="#FFFFFFFF"
+                android:textSize="12.0sp" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/param_1"
+                android:layout_width="48.0dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:shadowColor="#FF000000"
+                android:shadowDy="1.0"
+                android:shadowRadius="1.0"
+                android:text="1"
+                android:textColor="#FFFFFFFF"
+                android:textSize="12.0sp" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/param_2"
+                android:layout_width="48.0dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:shadowColor="#FF000000"
+                android:shadowDy="1.0"
+                android:shadowRadius="1.0"
+                android:text="2"
+                android:textColor="#FFFFFFFF"
+                android:textSize="12.0sp" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/param_3"
+                android:layout_width="48.0dip"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:shadowColor="#FF000000"
+                android:shadowDy="1.0"
+                android:shadowRadius="1.0"
+                android:text="3"
+                android:textColor="#FFFFFFFF"
+                android:textSize="12.0sp" >
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="visible" >
+    </ProgressBar>
+
 </RelativeLayout>
