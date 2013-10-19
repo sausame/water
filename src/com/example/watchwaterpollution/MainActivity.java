@@ -1,5 +1,9 @@
 package com.example.watchwaterpollution;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -8,9 +12,11 @@ import java.util.GregorianCalendar;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -118,7 +124,44 @@ public class MainActivity extends Activity {
 	}
 
 	private void onActionAdd() {
-		WaterManager.test();
+		mDateStatusList.setDrawingCacheEnabled(true);
+		Bitmap bitmap = Bitmap.createBitmap(mDateStatusList.getDrawingCache());
+		
+		savePicture(bitmap);
+	}
+
+	private boolean savePicture(Bitmap bitmap) {
+		String sdStatus = Environment.getExternalStorageState();
+		if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) {
+			Log.e(TAG, "SD card is not avaiable/writeable right now.");
+			return false;
+		}
+
+		FileOutputStream b = null;
+		File file = new File("/sdcard/myImage/");
+		file.mkdirs();
+
+		String str = null;
+		Date date = null;
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+		date = new Date();
+		str = format.format(date);
+		String fileName = "/sdcard/myImage/" + str + ".jpg";
+		try {
+			b = new FileOutputStream(fileName);
+			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				b.flush();
+				b.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return true;
 	}
 
 	private void onActionSettings() {
