@@ -17,20 +17,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.watchwaterpollution.WatcherListActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name="com.example.watchwaterpollution.WatcherDetailActivity"
-            android:label="@string/title_watcher_detail"
-            android:parentActivityName=".WatcherListActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".WatcherListActivity" />
-        </activity>
-        <activity
             android:name="com.example.watchwaterpollution.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
