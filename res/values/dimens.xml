@@ -35,4 +35,7 @@
 
     <dimen name="setting_margin">6dp</dimen>
     <dimen name="setting_items_margin_top">12dp</dimen>
+    
+	<dimen name="shadow_width">15dp</dimen >
+	<dimen name="slidingmenu_offset">60dp</dimen >
 </resources>

@@ -10,6 +10,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -50,6 +52,18 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		/*** 初始化侧滑菜单 Begin ***/
+		SlidingMenu menu = new SlidingMenu(this);
+		menu.setMode(SlidingMenu.LEFT);
+		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		menu.setShadowWidthRes(R.dimen.shadow_width); // 1）
+		menu.setShadowDrawable(R.drawable.shadow); // 2）
+		menu.setBehindOffsetRes(R.dimen.slidingmenu_offset); // 3）
+		menu.setFadeDegree(0.35f);
+		menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+		menu.setMenu(R.layout.activity_main); // 4）
+		/*** 初始化侧滑菜单 End ***/
+		
 		initData();
 
 		mAdapter = new WaterAdapter(this, mData);
