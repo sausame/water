@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/lastupdate"
                 android:textColor="@color/bg_popupwindow"
-                android:textSize="10sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
     </RelativeLayout>
