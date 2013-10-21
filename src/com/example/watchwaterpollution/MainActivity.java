@@ -235,7 +235,7 @@ public class MainActivity extends Activity {
 				viewGroup = (ItemViewGroup) view.getTag();
 			}
 
-			viewGroup.setValues(mData.get(position), mIsUpdating);
+			viewGroup.setValues(mData.get(mData.size() - position - 1), mIsUpdating);
 
 			return view;
 		}
