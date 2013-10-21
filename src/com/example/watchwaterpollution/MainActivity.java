@@ -61,7 +61,7 @@ public class MainActivity extends Activity {
 		menu.setBehindOffsetRes(R.dimen.slidingmenu_offset); // 3）
 		menu.setFadeDegree(0.35f);
 		menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-		menu.setMenu(R.layout.activity_main); // 4）
+		menu.setMenu(R.layout.left_menu_layout); // 4）
 		/*** 初始化侧滑菜单 End ***/
 		
 		initData();
@@ -106,8 +106,8 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_add:
-			onActionAdd();
+		case R.id.action_sync:
+			onActionSync();
 			return true;
 		case R.id.action_settings:
 			onActionSettings();
@@ -137,7 +137,7 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	private void onActionAdd() {
+	private void onActionSync() {
 		mDateStatusList.setDrawingCacheEnabled(true);
 		Bitmap bitmap = Bitmap.createBitmap(mDateStatusList.getDrawingCache());
 		

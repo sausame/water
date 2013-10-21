@@ -11,8 +11,8 @@ public class WaterMainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.my_layout);
-        
+		setContentView(R.layout.left_menu_layout);
+ /*       
         final LinearLayout left=(LinearLayout)findViewById(R.id.left_menu);
         final LinearLayout right=(LinearLayout)findViewById(R.id.right_menu);
         right.setVisibility(View.GONE);
@@ -32,7 +32,7 @@ public class WaterMainActivity extends Activity {
                     left.setVisibility(View.GONE);
                 }
             }
-        });
+        });*/
 	}
 
 	@Override
